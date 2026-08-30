@@ -174,6 +174,18 @@
       line-height:1.6;
     }
 
+  
+    /* Final success page: lift content slightly so bottom decorations have more breathing room */
+    #success.active, .success.active{
+      justify-content:flex-start;
+      padding-top:clamp(34px,7vh,72px);
+      padding-bottom:110px;
+    }
+    #success .success-details, .success .success-details{
+      margin-top:18px;
+      margin-bottom:18px;
+    }
+
   </style>
 </head>
 <body>
@@ -196,7 +208,7 @@
       <div class="invite-card">
         <b>名額：</b>1 名<br>
         <b>指定對象：</b>陳繪璇先生<br>
-        <b>有效期限：</b>2 Days Only｜9/6（日）－ 9/8（二）<br><br>
+        <b>有效期限：</b>2 Days Only｜9/6－ 9/8<br><br>
         ⚠️ 本邀請不開放轉讓<br>
         也不接受推薦其他人 😌
       </div>
