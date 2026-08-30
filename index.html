@@ -7,16 +7,16 @@
   <title>Special Invitation</title>
   <style>
     :root{
-      --bg1:#fff9fb;
-      --bg2:#f7f4ff;
-      --card:#ffffffee;
-      --text:#40384f;
-      --muted:#81798d;
-      --pink:#ff7da9;
-      --pink2:#ff5f95;
-      --lav:#cec5ff;
-      --soft:#f1eef7;
-      --shadow:0 22px 70px rgba(93,72,118,.15);
+      --bg1:#F4F0E8;
+      --bg2:#DCE6E7;
+      --card:#F7F4EDEE;
+      --text:#4F5C5E;
+      --muted:#7E8989;
+      --pink:#91AEB5;
+      --pink2:#7F9EA6;
+      --lav:#C8D4D4;
+      --soft:#E8E7E1;
+      --shadow:0 22px 70px rgba(79,91,92,.13);
     }
     *{box-sizing:border-box}
     html,body{margin:0;min-height:100%;font-family:"PingFang TC","Noto Sans TC","Microsoft JhengHei",sans-serif;color:var(--text)}
@@ -27,8 +27,8 @@
       overflow:hidden;
       padding:18px;
       background:
-        radial-gradient(circle at 8% 12%,#ffe2ef 0 16%,transparent 34%),
-        radial-gradient(circle at 92% 86%,#e6dfff 0 18%,transparent 36%),
+        radial-gradient(circle at 8% 12%,#D5E2E3 0 16%,transparent 34%),
+        radial-gradient(circle at 92% 86%,#E9DFD0 0 18%,transparent 36%),
         linear-gradient(135deg,var(--bg1),var(--bg2));
     }
     .app{
@@ -49,7 +49,7 @@
       gap:12px;
       margin-bottom:22px;
     }
-    .progress{flex:1;height:8px;background:#efeaf4;border-radius:999px;overflow:hidden}
+    .progress{flex:1;height:8px;background:#DDE4E3;border-radius:999px;overflow:hidden}
     .progress > div{
       height:100%;
       width:12.5%;
@@ -57,7 +57,7 @@
       background:linear-gradient(90deg,var(--pink),var(--lav));
       transition:width .35s ease;
     }
-    .mini{font-size:12px;color:#aaa2b2;letter-spacing:.08em}
+    .mini{font-size:12px;color:#8B9695;letter-spacing:.08em}
     .screen{
       display:none;
       min-height:470px;
@@ -82,21 +82,21 @@
     .btn{
       border:none;border-radius:999px;padding:15px 28px;
       font-size:18px;font-weight:800;cursor:pointer;
-      box-shadow:0 10px 24px rgba(90,70,110,.1);
+      box-shadow:0 10px 24px rgba(79,91,92,.10);
       -webkit-tap-highlight-color:transparent;
       transition:.2s ease;
     }
     .btn:active{transform:scale(.98)}
     .primary{background:var(--pink);color:#fff}
-    .soft{background:var(--soft);color:#6b6473}
+    .soft{background:var(--soft);color:#687675}
     .invite-card{
       width:min(100%,430px);
       padding:20px;
       border-radius:22px;
-      background:#fbf9fd;
-      border:1px dashed #d8cfdf;
+      background:#F7F4ED;
+      border:1px dashed #C8D0CD;
       text-align:left;
-      color:#665f70;
+      color:#667474;
       line-height:1.85;
       margin:6px auto 22px;
     }
@@ -109,11 +109,11 @@
       margin:4px auto 24px;
     }
     .benefit{
-      background:#faf8fc;
+      background:#F7F4ED;
       border-radius:16px;
       padding:14px 16px;
       font-size:16px;
-      box-shadow:0 6px 18px rgba(80,60,100,.04);
+      box-shadow:0 6px 18px rgba(79,91,92,.05);
     }
     .big-line{
       font-size:clamp(30px,8vw,46px);
@@ -135,7 +135,7 @@
     #yesBtn,#noBtn{position:absolute;top:65px}
     #yesBtn{left:28%;transform:translateX(-50%);z-index:2}
     #noBtn{left:72%;transform:translateX(-50%);z-index:3}
-    .hint{min-height:30px;color:#9d95a7;font-size:14px;margin-top:-12px}
+    .hint{min-height:30px;color:#8A9695;font-size:14px;margin-top:-12px}
     .stamp{
       display:inline-block;
       margin-top:10px;
