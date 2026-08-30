@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#fff8fb" />
+  <title>Special Invitation</title>
+  <style>
+    :root{
+      --bg1:#fff9fb;
+      --bg2:#f7f4ff;
+      --card:#ffffffee;
+      --text:#40384f;
+      --muted:#81798d;
+      --pink:#ff7da9;
+      --pink2:#ff5f95;
+      --lav:#cec5ff;
+      --soft:#f1eef7;
+      --shadow:0 22px 70px rgba(93,72,118,.15);
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;min-height:100%;font-family:"PingFang TC","Noto Sans TC","Microsoft JhengHei",sans-serif;color:var(--text)}
+    body{
+      min-height:100vh;
+      display:grid;
+      place-items:center;
+      overflow:hidden;
+      padding:18px;
+      background:
+        radial-gradient(circle at 8% 12%,#ffe2ef 0 16%,transparent 34%),
+        radial-gradient(circle at 92% 86%,#e6dfff 0 18%,transparent 36%),
+        linear-gradient(135deg,var(--bg1),var(--bg2));
+    }
+    .app{
+      width:min(94vw,560px);
+      min-height:560px;
+      background:var(--card);
+      border:1px solid rgba(255,255,255,.9);
+      border-radius:30px;
+      box-shadow:var(--shadow);
+      backdrop-filter:blur(14px);
+      padding:20px 20px 26px;
+      position:relative;
+      overflow:hidden;
+    }
+    .top{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      margin-bottom:22px;
+    }
+    .progress{flex:1;height:8px;background:#efeaf4;border-radius:999px;overflow:hidden}
+    .progress > div{
+      height:100%;
+      width:12.5%;
+      border-radius:999px;
+      background:linear-gradient(90deg,var(--pink),var(--lav));
+      transition:width .35s ease;
+    }
+    .mini{font-size:12px;color:#aaa2b2;letter-spacing:.08em}
+    .screen{
+      display:none;
+      min-height:470px;
+      text-align:center;
+      align-items:center;
+      justify-content:center;
+      flex-direction:column;
+      animation:fade .35s ease both;
+    }
+    .screen.active{display:flex}
+    .icon{font-size:72px;margin-bottom:14px;animation:float 2.8s ease-in-out infinite}
+    h1,h2{margin:0 0 12px;line-height:1.3}
+    h1{font-size:clamp(30px,7vw,43px)}
+    h2{font-size:clamp(26px,6vw,35px)}
+    p{
+      margin:0 auto 22px;
+      max-width:420px;
+      color:var(--muted);
+      font-size:16px;
+      line-height:1.85;
+    }
+    .btn{
+      border:none;border-radius:999px;padding:15px 28px;
+      font-size:18px;font-weight:800;cursor:pointer;
+      box-shadow:0 10px 24px rgba(90,70,110,.1);
+      -webkit-tap-highlight-color:transparent;
+      transition:.2s ease;
+    }
+    .btn:active{transform:scale(.98)}
+    .primary{background:var(--pink);color:#fff}
+    .soft{background:var(--soft);color:#6b6473}
+    .invite-card{
+      width:min(100%,430px);
+      padding:20px;
+      border-radius:22px;
+      background:#fbf9fd;
+      border:1px dashed #d8cfdf;
+      text-align:left;
+      color:#665f70;
+      line-height:1.85;
+      margin:6px auto 22px;
+    }
+    .invite-card b{color:var(--text)}
+    .benefits{
+      width:min(100%,430px);
+      display:grid;
+      gap:12px;
+      text-align:left;
+      margin:4px auto 24px;
+    }
+    .benefit{
+      background:#faf8fc;
+      border-radius:16px;
+      padding:14px 16px;
+      font-size:16px;
+      box-shadow:0 6px 18px rgba(80,60,100,.04);
+    }
+    .big-line{
+      font-size:clamp(30px,8vw,46px);
+      font-weight:900;
+      line-height:1.35;
+      margin-bottom:20px;
+    }
+    .subline{
+      color:var(--muted);
+      margin-bottom:22px;
+      line-height:1.8;
+    }
+    .question-zone{
+      width:100%;
+      height:220px;
+      position:relative;
+      margin-top:6px;
+    }
+    #yesBtn,#noBtn{position:absolute;top:65px}
+    #yesBtn{left:28%;transform:translateX(-50%);z-index:2}
+    #noBtn{left:72%;transform:translateX(-50%);z-index:3}
+    .hint{min-height:30px;color:#9d95a7;font-size:14px;margin-top:-12px}
+    .stamp{
+      display:inline-block;
+      margin-top:10px;
+      padding:8px 13px;
+      border:2px solid var(--pink);
+      color:var(--pink);
+      border-radius:9px;
+      transform:rotate(-5deg);
+      font-weight:900;
+      letter-spacing:.05em;
+    }
+    .hearts{position:fixed;inset:0;pointer-events:none;overflow:hidden}
+    .heart{position:absolute;bottom:-50px;animation:rise linear forwards}
+    @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+    @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+    @keyframes rise{from{transform:translateY(0) rotate(0deg);opacity:0}12%{opacity:1}to{transform:translateY(-115vh) rotate(32deg);opacity:0}}
+    @media(max-width:480px){
+      .app{min-height:600px;padding:18px 15px 22px}
+      .screen{min-height:510px}
+      .question-zone{height:240px}
+      #yesBtn{left:29%;top:70px}
+      #noBtn{left:71%;top:70px}
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <div class="top">
+      <div class="mini">SPECIAL INVITATION</div>
+      <div class="progress"><div id="bar"></div></div>
+    </div>
+
+    <section class="screen active">
+      <div class="icon">📩</div>
+      <h1>嗨，陳繪璇先生</h1>
+      <p>你收到了一份僅限本人查看的特殊邀請。</p>
+      <button class="btn primary next">查看邀請 →</button>
+    </section>
+
+    <section class="screen">
+      <div class="icon">✨</div>
+      <h2>Invitation Details</h2>
+      <div class="invite-card">
+        <b>名額：</b>1 名<br>
+        <b>指定對象：</b>陳繪璇先生<br>
+        <b>有效期間：</b>2 Days Only<br><br>
+        ⚠️ 本邀請不開放轉讓<br>
+        也不接受推薦其他人 😌
+      </div>
+      <button class="btn primary next">所以是什麼？ →</button>
+    </section>
+
+    <section class="screen">
+      <div class="icon">☁️</div>
+      <h2>這兩天你可以……</h2>
+      <div class="invite-card">
+        想放空就放空<br>
+        想睡覺就睡覺<br>
+        想做自己的事就做自己的事<br>
+        要去辦公室、教課也完全自由<br><br>
+        <b>基本上，不需要特別做什麼。</b>
+      </div>
+      <button class="btn primary next">這麼好？ →</button>
+    </section>
+
+    <section class="screen">
+      <div class="icon">🎁</div>
+      <h2>還包含</h2>
+      <div class="benefits">
+        <div class="benefit">🛏️ 一張可以好好睡覺的床</div>
+        <div class="benefit">🥐 早上可以一起去吃早餐</div>
+        <div class="benefit">🚶🏻‍♀️ 🚶🏻 吃飽之後各自去上班</div>
+        <div class="benefit">🛁 有浴缸舒服泡澡放鬆</div>
+      </div>
+      <button class="btn primary next">然後呢？ →</button>
+    </section>
+
+    <section class="screen">
+      <div class="icon">🌙</div>
+      <div class="big-line">晚上……</div>
+      <div class="subline">記得回來。🏠</div>
+      <button class="btn primary next">為什麼？ 👀</button>
+    </section>
+
+    <section class="screen">
+      <div class="icon">🗝️</div>
+      <h2>因為你有一個很重要的身分。</h2>
+      <p>而且這個名額，真的只有你有。</p>
+      <button class="btn primary next">什麼身分？ 👀</button>
+    </section>
+
+    <section class="screen" id="questionScreen">
+      <div class="icon">🏠✨</div>
+      <div class="mini" style="margin-bottom:10px;">ROOMMATE WANTED</div>
+      <h2>陳繪璇先生，<br>要不要來當我的兩日限定室友？</h2>
+      <p>可以照常過自己的生活，只是這兩天，記得回來當室友。</p>
+
+      <div class="question-zone" id="zone">
+        <button class="btn primary" id="yesBtn">接受 Offer 💗</button>
+        <button class="btn soft" id="noBtn">婉拒 Offer ❌</button>
+      </div>
+      <div class="hint" id="hint"></div>
+    </section>
+
+    <section class="screen" id="successScreen">
+      <div class="icon">🎉🏠💗</div>
+      <h1>室友配對成功！</h1>
+      <p>恭喜陳繪璇先生，正式成為本次兩日限定室友。</p>
+      <div class="invite-card">
+        <b>請攜帶：</b><br>
+        換洗衣物<br>
+        充電器<br>
+        你本人<br><br>
+        <b>其他的我準備 😌</b><br>
+        <span class="stamp">APPROVED</span>
+      </div>
+    </section>
+  </div>
+
+  <div class="hearts" id="hearts"></div>
+
+  <script>
+    const screens=[...document.querySelectorAll(".screen")];
+    const bar=document.getElementById("bar");
+    let current=0;
+
+    function show(i){
+      screens.forEach((s,idx)=>s.classList.toggle("active",idx===i));
+      current=i;
+      bar.style.width=Math.min(100,((i+1)/screens.length)*100)+"%";
+    }
+
+    document.querySelectorAll(".next").forEach(btn=>{
+      btn.addEventListener("click",()=>show(current+1));
+    });
+
+    const noBtn=document.getElementById("noBtn");
+    const yesBtn=document.getElementById("yesBtn");
+    const zone=document.getElementById("zone");
+    const hint=document.getElementById("hint");
+    const successScreen=document.getElementById("successScreen");
+    const hearts=document.getElementById("hearts");
+
+    let escapeCount=0;
+    let lastMove=0;
+
+
+    function moveNo(){
+      const now=Date.now();
+      if(now-lastMove<180) return;
+      lastMove=now;
+      escapeCount++;
+
+      const zr=zone.getBoundingClientRect();
+      const br=noBtn.getBoundingClientRect();
+      const maxX=Math.max(8,zr.width-br.width-8);
+      const maxY=Math.max(8,zr.height-br.height-8);
+
+      noBtn.style.left=(Math.random()*maxX)+"px";
+      noBtn.style.top=(Math.random()*maxY)+"px";
+      noBtn.style.transform="none";
+
+      if(escapeCount>=6){
+        noBtn.style.transition="opacity .35s ease,transform .35s ease";
+        noBtn.style.opacity="0";
+        noBtn.style.transform="scale(.45)";
+        noBtn.style.pointerEvents="none";
+        setTimeout(()=>{
+          noBtn.style.display="none";
+          yesBtn.style.left="50%";
+          yesBtn.style.top="82px";
+          hint.textContent="此功能鍵目前故障中";
+        },350);
+      }
+    }
+
+    noBtn.addEventListener("mouseenter",moveNo);
+    noBtn.addEventListener("pointerdown",(e)=>{e.preventDefault();moveNo();});
+    noBtn.addEventListener("click",(e)=>{e.preventDefault();moveNo();});
+
+    yesBtn.addEventListener("click",()=>{
+      show(screens.indexOf(successScreen));
+      launchHearts();
+    });
+
+    function launchHearts(){
+      const icons=["💗","💕","💖","✨","🏠"];
+      for(let i=0;i<42;i++){
+        const el=document.createElement("span");
+        el.className="heart";
+        el.textContent=icons[Math.floor(Math.random()*icons.length)];
+        el.style.left=Math.random()*100+"vw";
+        el.style.fontSize=(18+Math.random()*26)+"px";
+        el.style.animationDuration=(3+Math.random()*3)+"s";
+        el.style.animationDelay=(Math.random()*1.7)+"s";
+        hearts.appendChild(el);
+        setTimeout(()=>el.remove(),7600);
+      }
+    }
+  </script>
+</body>
+</html>
