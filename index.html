@@ -257,6 +257,19 @@
     .meter{height:10px;background:rgba(79,91,92,.10);border-radius:999px;overflow:hidden;width:min(100%,390px);margin:14px auto}
     .meter > div{height:100%;width:0;background:var(--pink);border-radius:999px;transition:width 1.1s ease}
 
+
+    .sudoku-board{display:grid;grid-template-columns:repeat(3,68px);gap:7px;justify-content:center;margin:18px auto}
+    .sudoku-cell{width:68px;height:68px;border-radius:16px;border:1px solid rgba(79,91,92,.14);background:rgba(247,244,237,.9);display:flex;align-items:center;justify-content:center;font-size:26px;font-weight:800;color:var(--text);padding:0}
+    .sudoku-cell.empty{cursor:pointer;background:rgba(220,230,231,.55)}
+    .sudoku-cell.selected{outline:3px solid rgba(145,174,181,.38);border-color:var(--pink)}
+    .sudoku-cell.clue{background:rgba(247,244,237,.72)}
+    .sudoku-cell.reveal{animation:keyPop .7s ease both;background:rgba(200,212,212,.72)}
+    .number-pad{display:flex;justify-content:center;gap:9px;flex-wrap:wrap;margin:12px auto 6px}
+    .num-btn{width:52px;height:48px;border:0;border-radius:14px;background:var(--soft);color:var(--text);font:inherit;font-weight:800;font-size:18px;cursor:pointer}
+    .puzzle-msg{min-height:25px;color:var(--muted);font-size:14px;font-weight:700;margin-top:8px}
+    .key-card{display:inline-flex;gap:9px;align-items:center;padding:12px 18px;border-radius:18px;background:rgba(220,230,231,.55);font-weight:900;letter-spacing:5px;font-size:23px;margin:12px 0}
+    @keyframes keyPop{0%{transform:scale(.92)}60%{transform:scale(1.08)}100%{transform:scale(1)}}
+
 </style>
 </head>
 <body>
@@ -286,6 +299,44 @@
       <button class="btn primary next">所以是什麼？ →</button>
     </section>
 
+
+
+    <section class="screen game-screen" id="puzzleScreen">
+      <div class="mini">MISSION 01</div>
+      <h2>解開第一個線索</h2>
+      <p>把缺少的數字填回九宮格。<br>每一橫排、直排、斜線加起來都要一樣。</p>
+
+      <div class="sudoku-board" aria-label="九宮格數字謎題">
+        <button class="sudoku-cell clue" type="button" data-r="0" data-c="0">2</button>
+        <button class="sudoku-cell empty" type="button" data-r="0" data-c="1"></button>
+        <button class="sudoku-cell clue" type="button" data-r="0" data-c="2">6</button>
+        <button class="sudoku-cell empty" type="button" data-r="1" data-c="0"></button>
+        <button class="sudoku-cell clue" type="button" data-r="1" data-c="1">5</button>
+        <button class="sudoku-cell empty" type="button" data-r="1" data-c="2"></button>
+        <button class="sudoku-cell clue" type="button" data-r="2" data-c="0">4</button>
+        <button class="sudoku-cell empty" type="button" data-r="2" data-c="1"></button>
+        <button class="sudoku-cell clue" type="button" data-r="2" data-c="2">8</button>
+      </div>
+
+      <div class="number-pad" aria-label="可選數字">
+        <button class="num-btn" type="button" data-num="1">1</button>
+        <button class="num-btn" type="button" data-num="3">3</button>
+        <button class="num-btn" type="button" data-num="7">7</button>
+        <button class="num-btn" type="button" data-num="9">9</button>
+      </div>
+      <div class="puzzle-msg" id="puzzleMsg">先點一個空格，再選數字 👀</div>
+      <button class="btn primary" id="checkPuzzle">確認答案</button>
+    </section>
+
+    <section class="screen" id="keyScreen">
+      <div class="icon">✨</div>
+      <div class="mini">PUZZLE SOLVED</div>
+      <h2>第一個線索已取得</h2>
+      <p>九宮格裡有三個數字被留下來了。</p>
+      <div class="key-card"><span>9</span><span>•</span><span>6</span><span>•</span><span>8</span></div>
+      <p class="hint">先記住它們。<br>現在還不用知道是什麼意思。</p>
+      <button class="btn primary next">繼續 →</button>
+    </section>
 
     <section class="screen game-screen">
       <div class="mini">QUICK TEST 1 / 5</div>
@@ -413,6 +464,42 @@
       current=i;
       bar.style.width=Math.min(100,((i+1)/screens.length)*100)+"%";
     }
+
+    
+    let selectedSudoku=null;
+    const solution={"0-1":"7","1-0":"9","1-2":"1","2-1":"3"};
+    document.querySelectorAll(".sudoku-cell.empty").forEach(cell=>{
+      cell.addEventListener("click",()=>{
+        document.querySelectorAll(".sudoku-cell.empty").forEach(x=>x.classList.remove("selected"));
+        selectedSudoku=cell; cell.classList.add("selected");
+      });
+    });
+    document.querySelectorAll(".num-btn").forEach(btn=>{
+      btn.addEventListener("click",()=>{
+        if(!selectedSudoku){
+          document.getElementById("puzzleMsg").textContent="先選一個空格 😀";
+          return;
+        }
+        selectedSudoku.textContent=btn.dataset.num;
+        selectedSudoku.classList.remove("selected");
+        selectedSudoku=null;
+        document.getElementById("puzzleMsg").textContent="填好了就按確認答案 ✨";
+      });
+    });
+    document.getElementById("checkPuzzle").addEventListener("click",()=>{
+      let complete=true, correct=true;
+      document.querySelectorAll(".sudoku-cell.empty").forEach(cell=>{
+        const key=cell.dataset.r+"-"+cell.dataset.c;
+        if(!cell.textContent.trim()) complete=false;
+        if(cell.textContent.trim()!==solution[key]) correct=false;
+      });
+      const msg=document.getElementById("puzzleMsg");
+      if(!complete){msg.textContent="還有空格沒有填完 👀";return;}
+      if(!correct){msg.textContent="Hmm… 好像哪裡不太對，再試一次 😀";return;}
+      msg.textContent="PUZZLE SOLVED ✓";
+      document.querySelectorAll(".sudoku-cell").forEach((cell,i)=>setTimeout(()=>cell.classList.add("reveal"),i*45));
+      setTimeout(()=>show(current+1),850);
+    });
 
     document.querySelectorAll(".next").forEach(btn=>{btn.addEventListener("click",()=>show(current+1));});
     document.querySelectorAll(".instinct").forEach(btn=>{
