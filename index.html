@@ -288,57 +288,78 @@
 
 
     <section class="screen game-screen">
-      <div class="mini">ROUND 1 / 4</div>
-      <h2>憑直覺，它們讓你想到什麼？</h2>
-      <div class="emoji-row">🌙　🔋　☕️　😴</div>
+      <div class="mini">QUICK TEST 1 / 5</div>
+      <h2>不要想太久，憑直覺選。</h2>
+      <p>夜晚比較想……</p>
       <div class="game-grid">
-        <button class="game-choice assoc">熬夜</button><button class="game-choice assoc">休息</button>
-        <button class="game-choice assoc">上班族日常</button><button class="game-choice assoc">不知道 😂</button>
+        <button class="game-choice instinct">🌃 出去晃晃</button>
+        <button class="game-choice instinct">🏠 找地方休息</button>
       </div>
-      <div class="game-note">先選一個，別想太久 👀</div>
     </section>
 
     <section class="screen game-screen">
-      <div class="mini">ROUND 2 / 4</div>
-      <h2>那這組呢？</h2>
-      <div class="emoji-row">🥐　☀️　☕️　🚶🏻‍♀️🚶🏻</div>
+      <div class="mini">QUICK TEST 2 / 5</div>
+      <h2>早餐派系？</h2>
       <div class="game-grid">
-        <button class="game-choice assoc">早晨</button><button class="game-choice assoc">早餐</button>
-        <button class="game-choice assoc">出門</button><button class="game-choice assoc">還是不知道</button>
+        <button class="game-choice instinct">🥐 西式</button>
+        <button class="game-choice instinct">🍳 中式</button>
       </div>
-      <div class="game-note">好像開始有一點方向了？</div>
     </section>
 
     <section class="screen game-screen">
-      <div class="mini">ROUND 3 / 4</div>
-      <h2>再來一組。</h2>
-      <div class="emoji-row">🛁　🫧　👕　🌙</div>
+      <div class="mini">QUICK TEST 3 / 5</div>
+      <h2>有空的時候……</h2>
       <div class="game-grid">
-        <button class="game-choice assoc">放鬆</button><button class="game-choice assoc">洗澡</button>
-        <button class="game-choice assoc">過夜？</button><button class="game-choice assoc">妳到底要幹嘛 😂</button>
+        <button class="game-choice instinct">🛋️ 耍廢</button>
+        <button class="game-choice instinct">🚶🏻 出門</button>
       </div>
-      <div class="game-note">嗯……越來越接近了。</div>
     </section>
 
     <section class="screen game-screen">
-      <div class="mini">FINAL ROUND</div>
-      <h2>最後一題。</h2>
-      <div class="emoji-row">2️⃣ DAYS　＋　🏠　＋　👤</div>
-      <p>現在猜得到這份邀請要幹嘛了嗎？</p>
+      <div class="mini">QUICK TEST 4 / 5</div>
+      <h2>洗澡模式？</h2>
       <div class="game-grid">
-        <button class="game-choice assoc">出去玩兩天</button><button class="game-choice assoc">約吃早餐</button>
-        <button class="game-choice assoc">離家出走 😂</button><button class="game-choice assoc">我放棄，公布答案</button>
+        <button class="game-choice instinct">🚿 快速解決</button>
+        <button class="game-choice instinct">🛁 泡到不想起來</button>
       </div>
+    </section>
+
+    <section class="screen game-screen">
+      <div class="mini">QUICK TEST 5 / 5</div>
+      <h2>忙完一天之後……</h2>
+      <div class="game-grid">
+        <button class="game-choice instinct">💼 再忙一下</button>
+        <button class="game-choice instinct">😴 我要休息了</button>
+      </div>
+    </section>
+
+    <section class="screen" id="analysisScreen">
+      <div class="icon">🧐</div>
+      <h2>正在分析你的答案……</h2>
+      <div class="analysis-list">
+        <div>生活習慣相容性　<span>✓</span></div>
+        <div>早餐相容性　　　<span>✓</span></div>
+        <div>耍廢能力　　　　<span>✓</span></div>
+        <div>自行活動能力　　<span>✓</span></div>
+      </div>
+      <div class="meter"><div id="meterFill"></div></div>
+      <div class="game-note" id="analysisText">計算匹配度中……</div>
+      <button class="btn primary" id="resultBtn" style="display:none">查看結果 →</button>
     </section>
 
     <section class="screen">
-      <div class="icon">🔓✨</div>
-      <h2>線索整理完成。</h2>
+      <div class="icon">✨</div>
+      <div class="mini">MATCH RESULT</div>
+      <h1>匹配度 97%</h1>
       <div class="invite-card">
-        兩天 ✓<br>可以各自忙自己的 ✓<br>早上可能一起吃早餐 ✓<br>晚上記得回來 ✓
+        能自己做自己的事 ✓<br>
+        具備正常休息能力 ✓<br>
+        可以一起吃早餐 ✓<br>
+        有自行上下班能力 ✓
       </div>
-      <p><b>其實，我只是缺一個人。</b></p>
-      <button class="btn primary next">解鎖答案 →</button>
+      <p><b>綜合評估：非常適合。</b></p>
+      <button class="btn primary next">所以到底適合什麼？</button>
+      <div class="hint">剩下 3% 等入住後觀察 😀</div>
     </section>
 
     <section class="screen" id="questionScreen">
@@ -394,7 +415,20 @@
     }
 
     document.querySelectorAll(".next").forEach(btn=>{btn.addEventListener("click",()=>show(current+1));});
-document.querySelectorAll(".assoc").forEach(btn=>{btn.addEventListener("click",()=>show(current+1));});
+    document.querySelectorAll(".instinct").forEach(btn=>{
+      btn.addEventListener("click",()=>{
+        show(current+1);
+        const active=screens[current];
+        if(active && active.id==="analysisScreen"){
+          const fill=document.getElementById("meterFill");
+          const txt=document.getElementById("analysisText");
+          const result=document.getElementById("resultBtn");
+          requestAnimationFrame(()=>fill.style.width="97%");
+          setTimeout(()=>{txt.textContent="分析完成：找到一項高度匹配的特殊職缺 👀";result.style.display="inline-flex";},1200);
+        }
+      });
+    });
+    document.getElementById("resultBtn").addEventListener("click",()=>show(current+1));
 
     const noBtn=document.getElementById("noBtn");
     const yesBtn=document.getElementById("yesBtn");
