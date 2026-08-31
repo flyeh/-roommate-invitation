@@ -247,7 +247,17 @@
       }
     }
 
-  </style>
+  
+    .game-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;width:min(100%,420px);margin:16px auto}
+    .game-choice{min-height:58px;border:1px solid rgba(79,91,92,.13);background:rgba(247,244,237,.82);border-radius:17px;padding:11px 12px;color:var(--text);font:inherit;font-weight:700;cursor:pointer}
+    .game-choice:active{transform:scale(.98)}
+    .emoji-row{font-size:38px;letter-spacing:8px;margin:12px 0 18px;line-height:1.5}
+    .game-note{min-height:28px;color:var(--muted);font-size:14px;font-weight:700;margin-top:4px}
+    .analysis-list{width:min(100%,390px);text-align:left;margin:16px auto;line-height:2;font-weight:700}
+    .meter{height:10px;background:rgba(79,91,92,.10);border-radius:999px;overflow:hidden;width:min(100%,390px);margin:14px auto}
+    .meter > div{height:100%;width:0;background:var(--pink);border-radius:999px;transition:width 1.1s ease}
+
+</style>
 </head>
 <body>
   <div class="app">
@@ -276,43 +286,59 @@
       <button class="btn primary next">所以是什麼？ →</button>
     </section>
 
+
+    <section class="screen game-screen">
+      <div class="mini">ROUND 1 / 4</div>
+      <h2>憑直覺，它們讓你想到什麼？</h2>
+      <div class="emoji-row">🌙　🔋　☕️　😴</div>
+      <div class="game-grid">
+        <button class="game-choice assoc">熬夜</button><button class="game-choice assoc">休息</button>
+        <button class="game-choice assoc">上班族日常</button><button class="game-choice assoc">不知道 😂</button>
+      </div>
+      <div class="game-note">先選一個，別想太久 👀</div>
+    </section>
+
+    <section class="screen game-screen">
+      <div class="mini">ROUND 2 / 4</div>
+      <h2>那這組呢？</h2>
+      <div class="emoji-row">🥐　☀️　☕️　🚶🏻‍♀️🚶🏻</div>
+      <div class="game-grid">
+        <button class="game-choice assoc">早晨</button><button class="game-choice assoc">早餐</button>
+        <button class="game-choice assoc">出門</button><button class="game-choice assoc">還是不知道</button>
+      </div>
+      <div class="game-note">好像開始有一點方向了？</div>
+    </section>
+
+    <section class="screen game-screen">
+      <div class="mini">ROUND 3 / 4</div>
+      <h2>再來一組。</h2>
+      <div class="emoji-row">🛁　🫧　👕　🌙</div>
+      <div class="game-grid">
+        <button class="game-choice assoc">放鬆</button><button class="game-choice assoc">洗澡</button>
+        <button class="game-choice assoc">過夜？</button><button class="game-choice assoc">妳到底要幹嘛 😂</button>
+      </div>
+      <div class="game-note">嗯……越來越接近了。</div>
+    </section>
+
+    <section class="screen game-screen">
+      <div class="mini">FINAL ROUND</div>
+      <h2>最後一題。</h2>
+      <div class="emoji-row">2️⃣ DAYS　＋　🏠　＋　👤</div>
+      <p>現在猜得到這份邀請要幹嘛了嗎？</p>
+      <div class="game-grid">
+        <button class="game-choice assoc">出去玩兩天</button><button class="game-choice assoc">約吃早餐</button>
+        <button class="game-choice assoc">離家出走 😂</button><button class="game-choice assoc">我放棄，公布答案</button>
+      </div>
+    </section>
+
     <section class="screen">
-      <div class="icon">☁️</div>
-      <h2>這兩天你可以……</h2>
+      <div class="icon">🔓✨</div>
+      <h2>線索整理完成。</h2>
       <div class="invite-card">
-        想放空就放空<br>
-        想睡覺就睡覺<br>
-        想做自己的事就做自己的事<br>
-        要去辦公室、教課也完全自由<br><br>
-        <b>基本上，不需要特別做什麼。</b>
+        兩天 ✓<br>可以各自忙自己的 ✓<br>早上可能一起吃早餐 ✓<br>晚上記得回來 ✓
       </div>
-      <button class="btn primary next">這麼好？ →</button>
-    </section>
-
-    <section class="screen">
-      <div class="icon">🎁</div>
-      <h2>還包含</h2>
-      <div class="benefits">
-        <div class="benefit">🛏️ 一張可以好好睡覺的床</div>
-        <div class="benefit">🥐 早上可以一起去吃早餐</div>
-        <div class="benefit">🚶🏻‍♀️ 🚶🏻 吃飽之後各自去上班</div>
-        <div class="benefit">🛁 有浴缸舒服泡澡放鬆</div>
-      </div>
-      <button class="btn primary next">然後呢？ →</button>
-    </section>
-
-    <section class="screen">
-      <div class="icon">🌙</div>
-      <div class="big-line">晚上……</div>
-      <div class="subline">記得回來。🏠</div>
-      <button class="btn primary next">為什麼？ 👀</button>
-    </section>
-
-    <section class="screen">
-      <div class="icon">🗝️</div>
-      <h2>因為你有一個很重要的身分。</h2>
-      <p>而且這個名額，真的只有你有。</p>
-      <button class="btn primary next">什麼身分？ 👀</button>
+      <p><b>其實，我只是缺一個人。</b></p>
+      <button class="btn primary next">解鎖答案 →</button>
     </section>
 
     <section class="screen" id="questionScreen">
@@ -367,9 +393,8 @@
       bar.style.width=Math.min(100,((i+1)/screens.length)*100)+"%";
     }
 
-    document.querySelectorAll(".next").forEach(btn=>{
-      btn.addEventListener("click",()=>show(current+1));
-    });
+    document.querySelectorAll(".next").forEach(btn=>{btn.addEventListener("click",()=>show(current+1));});
+document.querySelectorAll(".assoc").forEach(btn=>{btn.addEventListener("click",()=>show(current+1));});
 
     const noBtn=document.getElementById("noBtn");
     const yesBtn=document.getElementById("yesBtn");
